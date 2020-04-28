@@ -21,7 +21,7 @@ pipeline {
         stage ('Build image') {
             agent {
                 dockerfile {
-                    args '-t adrianoneres/spring-boot-template'
+                    additionalBuildArgs '-t adrianoneres/spring-boot-template'
                     reuseNode true
                 }
             }
