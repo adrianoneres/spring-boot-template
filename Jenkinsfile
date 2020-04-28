@@ -2,25 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage ('Compile') {
+        stage('Checkout') {
             steps {
-                withGradle {
-                    sh 'rm -fr ./build'
-                    sh './gradlew build'
-                    sh 'mv ./build/libs/*.jar ./build/libs/app.jar'
-                }
+                git 'https://github.com/adrianoneres/spring-boot-template.git'
             }
         }
 
         stage ('Build image') {
-            agent {
-                dockerfile {
-                    dir '.'
-                    label 'adrianoneres/spring-boot-template'
-                }
-            }
+            agent { dockerfile true }
             steps {
-                echo 'Building image'
+                echo 'Building image...'
             }
         }
     }
