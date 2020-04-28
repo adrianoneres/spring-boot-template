@@ -26,7 +26,16 @@ pipeline {
                 }
             }
             steps {
-                echo 'Building image...'
+                echo 'Image built.'
+            }
+        }
+
+        stage ('Run container') {
+            agent  {
+                docker {
+                    image 'adrianoneres/spring-boot-template'
+                    args '-p 8080:8080 -v /tmp:/var/log -e "SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.15.11:5432/spring-boot-template" -e "SPRING_JPA_SHOW_SQL=false" -e "LOGGING_FILE_NAME=/var/log/spring-boot-template.log"'
+                }
             }
         }
     }
