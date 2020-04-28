@@ -6,6 +6,7 @@ pipeline {
             steps {
                 withGradle {
                     sh './gradlew build'
+                    mv './build/libs/*.jar ./build/libs/app.jar'
                 }
             }
         }
