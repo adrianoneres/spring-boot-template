@@ -13,10 +13,10 @@ pipeline {
         }
 
         stage ('Build image') {
-            agent { dockerfile true }
-            steps {
-                def customImage = docker.build('adrianoneres/spring-boot-template')
-                customImage.push()
+            agent {
+                dockerfile {
+                    label 'adrianoneres/spring-boot-template'
+                }
             }
         }
     }
