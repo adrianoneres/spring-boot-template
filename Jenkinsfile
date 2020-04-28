@@ -19,8 +19,10 @@ pipeline {
         }
 
         stage ('Build image') {
-            dockerfile {
-                reuseNode true
+            agent {
+                dockerfile {
+                    reuseNode true
+                }
             }
             steps {
                 echo 'Building image...'
