@@ -9,11 +9,6 @@ pipeline {
         }
 
         stage ('Compile') {
-            agent {
-                dockerfile {
-                    reuseNode true
-                }
-            }
             steps {
                 withGradle {
                     sh 'rm -fr ./build'
@@ -24,8 +19,8 @@ pipeline {
         }
 
         stage ('Build image') {
-            agent {
-                dockerfile true
+            dockerfile {
+                reuseNode true
             }
             steps {
                 echo 'Building image...'
