@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        label 'whatever'
+        node {
+            label 'spring-boot-template'
+            customWorkspace 'spring-boot-template'
+        }
     }
 
     stages {
@@ -12,7 +15,9 @@ pipeline {
 
         stage ('Compile') {
             agent {
-                dockerfile true
+                dockerfile {
+                    reuseNode true
+                }
             }
             steps {
                 withGradle {
