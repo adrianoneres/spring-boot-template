@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'server'
+    }
 
     stages {
         stage('Checkout') {
@@ -18,6 +20,15 @@ pipeline {
                     sh './gradlew build'
                     sh 'mv ./build/libs/*.jar ./build/libs/app.jar'
                 }
+            }
+        }
+
+        stage ('Build image') {
+            agent {
+                dockerfile true
+            }
+            steps {
+                echo 'Building image...'
             }
         }
     }
