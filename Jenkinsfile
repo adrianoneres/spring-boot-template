@@ -15,8 +15,12 @@ pipeline {
         stage ('Build image') {
             agent {
                 dockerfile {
+                    dir '.'
                     label 'adrianoneres/spring-boot-template'
                 }
+            }
+            steps {
+                echo 'Building image'
             }
         }
     }
