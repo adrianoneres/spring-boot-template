@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'spring-boot-template'
-            customWorkspace 'spring-boot-template'
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
